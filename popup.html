@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulog na us? 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffeaf4, #ffd6ec);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins", "Comic Sans MS", cursive;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating hearts animation background */
+    .floating-hearts span {
+      position: absolute;
+      bottom: -20px;
+      font-size: 22px;
+      color: #ffb6d9;
+      animation: floatUp 5s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Popup box */
+    .popup {
+      display: none;
+      background: #fff8fb;
+      border: 2px solid #ffb6d9;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.6s ease forwards;
+      width: 320px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .popup img {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.7);
+    }
+
+    .popup h1 {
+      color: #ff5ca8;
+      font-size: 1.5em;
+      margin: 8px 0;
+      text-shadow: 1px 1px 6px rgba(255, 160, 200, 0.5);
+    }
+
+    .popup p {
+      color: #ff8cc9;
+      font-size: 0.95em;
+      margin: 0;
+    }
+
+    .ribbon {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -8px); }
+    }
+
+    .button {
+      background: linear-gradient(90deg, #ffb6d9, #ffa6d4);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 1em;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(255, 150, 200, 0.5);
+    }
+
+    .button:hover {
+      background: linear-gradient(90deg, #ff8fc6, #ff66b2);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts Background -->
+  <div class="floating-hearts" id="hearts"></div>
+
+  <div class="popup" id="popup">
+    <div class="ribbon">🎀</div>
+    <img src="your-photo.jpg" alt="cute photo">
+    <h1>tulog na us? 😴💞</h1>
+    <p>hahaha joke lang (pero kung gusto mo... 😳)</p>
+    <button class="button" onclick="closePopup()">okie hehe 💗</button>
+  </div>
+
+  <script>
+    // Show popup after 3 seconds
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'block';
+    }, 3000);
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      alert('goodnight cutie 😚💤');
+    }
+
+    // Floating hearts generator
+    const heartsContainer = document.getElementById('hearts');
+    const hearts = ['💖','💗','💞','💕','💓'];
+    setInterval(() => {
+      const heart = document.createElement('span');
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 500);
+  </script>
+
+</body>
+</html>
