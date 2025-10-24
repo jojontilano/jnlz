@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messenger Message</title>
+  <style>
+    body {
+      background-color: #e5ddd5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .chat-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 350px;
+      max-width: 90%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      font-weight: 600;
+      color: #0084ff;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .message-bubble {
+      background-color: #0084ff;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 18px 18px 2px 18px;
+      max-width: 80%;
+      align-self: flex-end;
+      font-size: 18px;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="header">Messenger</div>
+    <div class="message-bubble">Hi, ssob? hshshs😊</div>
+    <div class="footer">sent just now</div>
+  </div>
+</body>
+</html>
