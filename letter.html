@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hay Kamusta 💌</title>
+  <style>
+    :root{
+      --bg: #ffe6f2;
+      --ribbon1: #ffcce5;
+      --ribbon2: #ffd6eb;
+      --letter-bg: #fffafc;
+      --accent: #ff66b2;
+      --soft: #ffb6c1;
+    }
+
+    /* page */
+    html,body{
+      height:100%;
+      margin:0;
+      background: var(--bg);
+      font-family: "Poppins", "Comic Sans MS", cursive;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* outer lace border */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:12px;
+      border-radius:22px;
+      border: 12px solid rgba(255,214,229,0.9);
+      pointer-events:none;
+      box-sizing:border-box;
+    }
+
+    .ribbon{
+      position:fixed;
+      left:0; right:0; top:0;
+      height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(90deg,var(--ribbon1),var(--ribbon2),var(--ribbon1));
+      box-shadow:0 4px 12px rgba(255,182,193,0.25);
+      z-index:1;
+    }
+    .ribbon::after{
+      content:"🎀";
+      font-size:34px;
+      animation: bounce 1.6s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+    }
+
+    /* central area */
+    .stage{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:110px 20px 70px; /* leave space for ribbon and hearts */
+      box-sizing:border-box;
+    }
+
+    /* letter box - centered content */
+    .letter{
+      width: min(520px, 86vw);
+      max-width:520px;
+      background: var(--letter-bg);
+      border-radius:16px;
+      padding:30px 28px;
+      box-shadow: 0 10px 30px rgba(255,182,193,0.18);
+      border: 2px dashed var(--soft);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center; /* centers vertically */
+      gap:18px;
+      box-sizing:border-box;
+      text-align:center;
+    }
+
+    /* message text - smaller and centered */
+    .message {
+      font-size: 1.05rem;       /* smaller so it fits */
+      line-height:1.4;
+      color: var(--accent);
+      margin:0;
+      padding:0 6px;
+      word-wrap:break-word;
+      white-space:pre-wrap;     /* keep spaces/newlines if any */
+      letter-spacing:0.2px;
+      font-weight:600;
+      max-height:180px;
+      overflow:auto;
+    }
+
+    /* kept the little envelope prompt */
+    .click-text{
+      color:#ff80bf;
+      font-size:0.95rem;
+      cursor:pointer;
+      opacity:0.95;
+      user-select:none;
+      transition:transform .12s ease,opacity .12s;
+    }
+    .click-text:active{ transform:scale(.98) }
+    .click-text:hover{ opacity:1; transform:scale(1.03) }
+
+    /* hearts bottom */
+    .hearts{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:16px;
+      display:flex;
+      gap:10px;
+      font-size:20px;
+      z-index:2;
+      color:#ff99cc;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{ transform: translate(-50%,0) }
+      50%{ transform: translate(-50%,-8px) }
+    }
+
+    /* responsive: reduce padding on small screens */
+    @media (max-width:420px){
+      .letter{ padding:22px; width:92vw; }
+      .ribbon{height:56px}
+      .message{ font-size:0.98rem }
+    }
+  </style>
+</head>
+<body>
+  <div class="ribbon" aria-hidden="true"></div>
+
+  <main class="stage" role="main">
+    <article class="letter" aria-label="Letter">
+      <!-- message element (centered) -->
+      <p id="message" class="message" aria-live="polite"></p>
+
+      <!-- click to start -->
+      <div class="click-text" id="startBtn" role="button" tabindex="0">
+        💌 Click to open your letter 💌
+      </div>
+    </article>
+  </main>
+
+  <div class="hearts" aria-hidden="true">💞 💕 💖 💗 💓</div>
+
+  <script>
+    // Put your message here:
+    const text = "halaaaa na hack mo acc..... charotttt syon tagay💕";
+
+    const messageEl = document.getElementById('message');
+    const startBtn = document.getElementById('startBtn');
+
+    let i = 0;
+    let running = false;
+    let timer = null;
+
+    function typeOnce() {
+      if (running) return;
+      running = true;
+      messageEl.textContent = ""; // reset
+      i = 0;
+
+      // small pause for effect, then start
+      timer = setInterval(() => {
+        if (i < text.length) {
+          messageEl.textContent += text[i++];
+          // keep scroll at bottom if message overflows
+          messageEl.scrollTop = messageEl.scrollHeight;
+        } else {
+          clearInterval(timer);
+          running = false;
+        }
+      }, 110); // typing speed (ms) — adjust if needed
+    }
+
+    // support click and keyboard (Enter/Space)
+    startBtn.addEventListener('click', typeOnce);
+    startBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        typeOnce();
+      }
+    });
+
+    // Optional: start automatically if you want:
+    // window.addEventListener('load', () => setTimeout(typeOnce, 400));
+  </script>
+</body>
+</html>
